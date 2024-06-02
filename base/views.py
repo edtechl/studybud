@@ -83,7 +83,7 @@ def home(request):
 
 def room(request, pk):
     room = Room.objects.get(id=pk)
-    room_messages = room.message_set.all().order_by('-created') #query child object of room
+    room_messages = room.message_set.all() #query child object of room. This references all the message instances that are related to (from) the room instance
     participants = room.participants.all()
 
     if request.method == "POST":

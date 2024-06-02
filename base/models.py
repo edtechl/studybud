@@ -40,5 +40,9 @@ class Message(models.Model):
     updated = models.DateTimeField(auto_now=True)  # on every update
     created = models.DateTimeField(auto_now_add=True)  # only on creation
 
+    class Meta:
+        # Reverse order (descending). For ascending order, remove the '-' prefix
+        ordering = ['-updated', '-created']
+
     def __str__(self):
         return self.body[0:50]
