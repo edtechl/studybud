@@ -118,7 +118,9 @@ def createRoom(request):
         # print(request.POST) # print POST request data
         form = RoomForm(request.POST)
         if form.is_valid():
-            form.save()
+            room = form.save(commit=False) # save instance of the room form without committing to DB yet
+            room.host = request.user # Set the host for the room form to the current logged-in user
+            room.save()
             return redirect('home')
 
     # initially just render the empty form for the user to complete
